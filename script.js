@@ -422,6 +422,28 @@ function wireHighlights(data) {
   });
 }
 
+/* ---------- per-company wording (?for=<key>) ---------- */
+
+// index.html already shows the default wording, so this only changes text when
+// ?for= names a company in data/targets.json. Unknown keys keep the default.
+function applyTarget() {
+  const key = (new URLSearchParams(location.search).get("for") || "").trim().toLowerCase();
+  return fetch("data/targets.json")
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`data/targets.json: HTTP ${r.status}`))))
+    .then((data) => {
+      const own = Object.prototype.hasOwnProperty.call(data.targets || {}, key) ? data.targets[key] : null;
+      if (key && !own) console.warn(`?for=${key}: no entry in data/targets.json, showing the default wording`);
+      const t = { ...data.default, ...(own || {}) };
+      for (const id of ["applying", "closing"]) {
+        const el = document.getElementById(id);
+        if (el && t[id]) el.textContent = t[id];   // plain text, never HTML
+      }
+    })
+    .catch((err) => console.error(err));   // keep the default wording already in the page
+}
+
+applyTarget();
+
 /* ---------- boot ---------- */
 
 fetch("data/posts.json")
