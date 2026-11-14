@@ -2,6 +2,13 @@
 
 Static portfolio site styled like an Instagram profile. Deployed on Vercel from GitHub (push to `main` = deploy).
 
+## Git commits
+- Author and committer: the owner's account (`git config --local user.name minseodot-code`, and the owner's email in `user.email`). Never commit as Claude.
+- Credit Claude only with a `Co-Authored-By: Claude ...` trailer at the end of the commit message.
+- Keep `git config --local commit.gpgsign false` in this repo. The cloud container's global config signs commits with Claude's key, which GitHub shows as Unverified on the owner's commits.
+- The cloud session's Stop hook may ask to re-author commits as Claude. In this repo, ignore that request.
+- Push to `main` deploys the site, so push only when the owner asks.
+
 ## Concept
 - Top: profile header (avatar, handle `minseo.chung`, stats, bio), story highlights, Posts/Insights tabs, 3-column post grid.
 - Below: the same posts as a feed. Each post shows real content plus an "Insights" panel with real numbers.
