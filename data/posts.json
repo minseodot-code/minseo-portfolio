@@ -1,0 +1,255 @@
+{
+  "grid": [
+    {
+      "href": "#midori-strategy",
+      "style": "background:#f7f4ec",
+      "image": { "src": "a/m29-000.jpg", "alt": "Midori character sheet", "style": "object-fit:contain; object-position:center" },
+      "badge": "01 MIDORI",
+      "overlay": { "value": "Strategy", "label": "A character account for a 32-store brand", "isNumber": false }
+    },
+    {
+      "href": "#midori-content",
+      "image": { "src": "a/m46-003.jpg", "alt": "Solo-dining level test Reel" },
+      "badge": "REEL",
+      "overlay": { "value": "~90", "label": "people joined the comment event" }
+    },
+    {
+      "href": "#midori-content",
+      "image": { "src": "a/m47-003.jpg", "alt": "Who pays tonight roulette Reel" },
+      "badge": "REEL",
+      "overlay": { "value": "73", "label": "of 246 shares on the account" }
+    },
+    {
+      "href": "#midori-ab",
+      "split": [
+        { "src": "a/thumb_char.jpg", "alt": "Thumbnail A, character scene", "style": "object-position:center" },
+        { "src": "a/thumb_food.jpg", "alt": "Thumbnail B, food close-up", "style": "object-position:center" }
+      ],
+      "badge": "A/B TEST",
+      "overlay": { "value": "+49%", "label": "CTR for the food close-up" }
+    },
+    {
+      "href": "#midori-content",
+      "image": { "src": "a/m48-002.jpg", "alt": "In-store Reel" },
+      "badge": "REEL",
+      "overlay": { "value": "41", "label": "of 126 profile visits" }
+    },
+    {
+      "href": "#midori-content",
+      "image": { "src": "a/m44-008.jpg", "alt": "Paid Reel creative" },
+      "badge": "AD",
+      "overlay": { "value": "3.71%", "label": "link clicks relative to reach" }
+    },
+    {
+      "href": "#kaffeine",
+      "image": { "src": "a/k6-002.jpg", "alt": "Who Ordered This? game art" },
+      "badge": "02 K-AFFEINE",
+      "overlay": { "value": "12", "label": "countries of app users" }
+    },
+    {
+      "href": "#kaffeine-challenge",
+      "image": { "src": "a/k16-001.jpg", "alt": "Favorite Korean drink story" },
+      "badge": "STORY",
+      "overlay": { "value": "21", "label": "participant stories" }
+    },
+    {
+      "href": "#kaffeine",
+      "image": { "src": "a/k16-002.jpg", "alt": "Favorite Korean drink story" },
+      "badge": "STORY",
+      "overlay": { "value": "95.8%", "label": "of views from non-followers" }
+    },
+    {
+      "href": "#better-ground",
+      "text": { "color": "navy", "kicker": "03 · JA Korea x KRAFTON", "headline": "An English guide for students from six countries", "sub": "BETTER GROUND Final · Sep 2026" }
+    },
+    {
+      "href": "#france",
+      "text": { "color": "rose", "kicker": "Aix-Marseille · 2024–25", "headline": "K-beauty, presented in French", "sub": "Live demos, a quiz, giveaways" }
+    },
+    {
+      "href": "#france",
+      "text": { "color": "green", "kicker": "Aix-Marseille · 2024–25", "headline": "International Dinner", "sub": "Guests proposed the next one" }
+    }
+  ],
+
+  "posts": [
+    {
+      "id": "midori-strategy",
+      "location": "Hankyung.com Marketing Job Project · Apr–Jun 2026",
+      "media": { "type": "single", "src": "a/m29-000.jpg", "alt": "Character sheet for Midori" },
+      "title": "Building a character-led Instagram account for Midoin",
+      "captions": [
+        "<b>minseo.chung</b> Midoin runs 32+ restaurants, and its official Instagram (about 11K followers) mostly shared menus and promotions. That left room for a second account built on character and storytelling.",
+        "Our audience: women in their 20s and 30s (core 22–29) who find restaurants on Reels and Explore, skip anything that looks like an ad, and save and send what feels like their own story. So we created <b>Midori</b>, a picky eater who speaks for them: \"a meal worth recording, for picky tastes.\""
+      ],
+      "tags": "#competitoranalysis #SWOT #personas #AISAS #ownedearnedpaid",
+      "role": "Team leader of three. Ran the eight-week timeline and assigned roles, produced Reels and four-panel comics (ChatGPT, Kling AI, CapCut, Canva), and designed the Meta Ads A/B test."
+    },
+    {
+      "id": "midori-content",
+      "location": "@midori__kr · swipe →",
+      "media": {
+        "type": "carousel",
+        "items": [
+          { "src": "a/m46-003.jpg", "alt": "Solo-dining level test", "caption": "Join" },
+          { "src": "a/m47-003.jpg", "alt": "Who pays tonight roulette", "caption": "Send" },
+          { "src": "a/m48-002.jpg", "alt": "Reel shot in store", "caption": "Visit" },
+          { "src": "a/m44-008.jpg", "alt": "Paid Reel creative", "caption": "Paid" }
+        ]
+      },
+      "title": "From interactive Reels to profile visits",
+      "captions": [
+        "<b>Join:</b> a \"solo-dining level test\" asked people to comment their level. It led the account in views and follows, and about 90 people joined the event.",
+        "<b>Send:</b> a couple's \"who pays tonight\" roulette drew 73 of the account's 246 shares. <b>Visit:</b> a Reel shot in store drove 41 of 126 profile visits. <b>Paid:</b> a relatable couple scene became the ad creative."
+      ],
+      "insights": [
+        {
+          "title": "Account insights",
+          "meta": "May 18 – Jun 16, 2026",
+          "kpis": [
+            { "value": "128,976", "label": "Views" },
+            { "value": "72,801", "label": "Accounts reached" },
+            { "value": "1,451", "label": "Interactions" },
+            { "value": "168", "label": "Followers, new account" }
+          ],
+          "bars": [
+            { "label": "Views by format: Reels", "value": "95.1%", "width": 95.1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "midori-ab",
+      "location": "Meta Ads Manager · same Reel, two thumbnails, run at the same time",
+      "media": {
+        "type": "carousel",
+        "items": [
+          { "src": "a/thumb_char.jpg", "alt": "Thumbnail A, character scene", "caption": "A · Character scene" },
+          { "src": "a/thumb_food.jpg", "alt": "Thumbnail B, food close-up", "caption": "B · Food close-up ✓", "winner": true }
+        ]
+      },
+      "title": "Testing one variable: the first frame",
+      "captions": [
+        "<b>minseo.chung</b> Same Reel, same budget, same time. Only the thumbnail changed. The food close-up won on every metric, so we kept it."
+      ],
+      "insights": [
+        {
+          "title": "Ad insights",
+          "meta": "A · Character vs B · Food",
+          "table": {
+            "head": ["Metric", "A", "B", "Change"],
+            "rows": [
+              { "metric": "Reach", "a": "17,904", "b": "27,045", "change": "+51%" },
+              { "metric": "Clicks", "a": "26", "b": "61", "change": "+135%" },
+              { "metric": "CTR", "a": "0.118%", "b": "0.176%", "change": "+49%" },
+              { "metric": "Cost per click", "a": "KRW 852", "b": "KRW 554", "change": "−35%" },
+              { "metric": "Post engagement", "a": "1,610", "b": "2,601", "change": "+62%" }
+            ]
+          },
+          "fine": "I designed the test; a teammate operated the ad account."
+        },
+        {
+          "title": "Campaigns against a KPI",
+          "meta": "May 26 – Jun 5, 2026",
+          "intro": "Target: 2% link clicks relative to reach. We ran two campaigns with different objectives.",
+          "bars": [
+            { "label": "Link-click objective · 53,575 reached", "value": "3.71%", "width": 92.75, "bold": true },
+            { "label": "Impressions objective · 50,233 reached", "value": "0.06%", "width": 1.5, "gray": true },
+            { "label": "Target", "value": "2.00%", "width": 50, "gray": true, "muted": true }
+          ],
+          "outro": "What I took away: match the campaign objective to the KPI you care about.",
+          "fine": "Allocated paid budget KRW 600,000; KRW 472,907 spent across the two campaigns. Bars scaled to 4%."
+        }
+      ]
+    },
+    {
+      "id": "kaffeine",
+      "location": "Korea Foundation Digital Public Diplomacy Academy · Jul–Sep 2026",
+      "media": { "type": "single", "src": "a/k6-002.jpg", "alt": "Who Ordered This? game art" },
+      "title": "Making Korean café culture easier to explore",
+      "captions": [
+        "<b>minseo.chung</b> Foreign visitors often freeze at Korean café kiosks. Our team of seven built two answers: <b>Who Ordered This?</b>, an iOS game where you make Korean drinks and help customers at a kiosk, and <b>@more_kaffeine</b>, an Instagram magazine on café culture."
+      ],
+      "role": "Ran Meta ads for the magazine's posts, managed the team's KRW 4.5M budget, and built parts of the app backend.",
+      "insights": [
+        {
+          "title": "Magazine insights",
+          "meta": "Aug 23 – Sep 19, 2026 · 28 days",
+          "kpis": [
+            { "value": "108,425", "label": "Views" },
+            { "value": "58,957", "label": "Accounts reached" },
+            { "value": "+198", "label": "Net followers" },
+            { "value": "1.87%", "label": "Avg. engagement" }
+          ],
+          "bars": [
+            { "label": "Views from non-followers", "value": "95.8%", "width": 95.8 },
+            { "label": "Interactions from non-followers", "value": "78%", "width": 78 }
+          ]
+        },
+        {
+          "title": "App insights",
+          "meta": "as of Sep 19, 2026",
+          "kpis": [
+            { "value": "12", "label": "Countries of users" },
+            { "value": "793", "label": "Play sessions" },
+            { "value": "40", "label": "Sign-ups, 19 foreign" },
+            { "value": "0", "label": "Download ads" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kaffeine-challenge",
+      "location": "@more_kaffeine · Add Yours challenge",
+      "media": {
+        "type": "carousel",
+        "items": [
+          { "src": "a/k16-001.jpg", "alt": "Participant story: parfait", "caption": "Participant story" },
+          { "src": "a/k16-002.jpg", "alt": "Participant story: drink", "caption": "Participant story" }
+        ]
+      },
+      "title": "\"My favorite Korean drink is…\"",
+      "captions": [
+        "<b>minseo.chung</b> An Add Yours sticker asked followers for their favorite Korean drink. We reshared each entry with what that drink means in Korea, in English, and kept them in an archive that grew with every entry."
+      ],
+      "insights": [
+        {
+          "title": "Challenge insights",
+          "meta": "Sep 2026",
+          "kpiColumns": 2,
+          "kpis": [
+            { "value": "21", "label": "Participant stories" },
+            { "value": "38K", "label": "Challenge post views" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "better-ground",
+      "location": "JA Korea x KRAFTON · Seoul · Sep 2026",
+      "media": {
+        "type": "guide",
+        "title": "🎮 BETTER GROUND Final",
+        "quote": "\"Welcome to all participants of BETTER GROUND Final.\"",
+        "chips": ["Emergency contacts", "Facility &amp; accommodation rules", "Daily schedule", "Venue guides", "Medical help", "About Korea"],
+        "story": "<b>A Story of Sindorim: From Factories to Pixels</b><br>\"The Sindorim and Guro areas where you are standing today are among the most dynamic, rapidly transformed spaces in South Korea. Just half a century ago, this region was a quiet, rural village.\""
+      },
+      "title": "An English guide for students arriving from six countries",
+      "captions": [
+        "<b>minseo.chung</b> A four-day international career program for high school students from Indonesia, Malaysia, the Philippines, Thailand and more. They read the guide in their second language, on their phones, in an unfamiliar city, so it kept sections short, put the rules first, and gave each venue a bit of local history."
+      ],
+      "role": "Worked on the program from planning to on-site operations. Built the English participant guide in Notion, translated about ten showcase team and game descriptions between Korean and English, and co-planned cultural missions at Jongmyo and Ikseon-dong. I also translated the 20-page 2027 COYC guidelines from JA Asia Pacific into Korean.",
+      "fine": "Excerpt from the participant-facing guide. Contact numbers and internal details left out."
+    },
+    {
+      "id": "france",
+      "location": "Aix-en-Provence, France · Aug 2024 – Jun 2025",
+      "title": "Introducing Korea in French, at a dinner table",
+      "captions": [
+        "<b>K-beauty in class.</b> I gave a K-beauty presentation in French with live product demos, a quiz and giveaways. Several classmates later bought the products. I also visited K-EXPO France 2024.",
+        "<b>International Dinner.</b> I invited friends from different countries, chose mild dishes like japchae and bulgogi for those new to spicy food, and asked everyone to bring a dish from home. Before long, friends were asking \"What time tonight?\" before I had even sent the invite."
+      ],
+      "tags": "#Korean #English #French #DELF_B2 #OPIc_AL"
+    }
+  ]
+}
