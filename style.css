@@ -157,3 +157,61 @@ td.up { font-weight: 800; color: #1f3a68; }
   table { font-size: 12.5px; }
   th, td { padding: 6px 3px; }
 }
+
+/* post popup (opened from the grid) */
+html.pm-open { overflow: hidden; }
+.pm { padding: 0; border: 0; background: transparent; width: calc(100vw - 120px); max-width: 1100px; height: min(calc(100vh - 80px), 760px); max-height: none; margin: auto; overflow: visible; color: var(--ink); }
+.pm::backdrop { background: rgba(0,0,0,.65); }
+.pm-x { position: fixed; top: 14px; right: 18px; width: 40px; height: 40px; border: 0; background: none; color: #fff; cursor: pointer; display: grid; place-items: center; z-index: 2; }
+.pm-x svg { width: 26px; height: 26px; }
+.pm-box { display: grid; grid-template-columns: minmax(0, 1fr) 400px; height: 100%; background: var(--card); border-radius: 6px; overflow: hidden; }
+
+.pm-media { position: relative; background: #000; min-width: 0; min-height: 0; }
+.pm-track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.pm-track::-webkit-scrollbar { display: none; }
+.pm-track:focus { outline: none; }
+.pm-slide { flex: 0 0 100%; height: 100%; scroll-snap-align: start; scroll-snap-stop: always; position: relative; display: grid; place-items: center; margin: 0; }
+.pm-slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.pm-slide.light { background: #f3f3f3; }
+.pm-slide figcaption { position: absolute; left: 12px; bottom: 12px; background: rgba(0,0,0,.65); color: #fff; font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 4px; }
+.pm-slide.win img { outline: 4px solid #ffd54a; outline-offset: -4px; }
+.pm-scrollable { overflow-y: auto; display: flex; flex-direction: column; }
+.pm-scrollable .guide { margin: auto 24px; }
+.pm-card { color: #fff; display: flex; align-items: flex-start; flex-direction: column; justify-content: space-between; padding: 40px; }
+.pm-card .k { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; opacity: .85; }
+.pm-card .h { font-size: 34px; font-weight: 800; line-height: 1.15; max-width: 16ch; text-wrap: balance; }
+.pm-card .s { font-size: 15px; opacity: .9; }
+.pm-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 50%; border: 0; background: rgba(255,255,255,.9); color: var(--ink); font-size: 22px; line-height: 1; font-weight: 700; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,.25); display: grid; place-items: center; padding-bottom: 3px; }
+.pm-nav[hidden] { display: none; }
+.pm-prev { left: 12px; } .pm-next { right: 12px; }
+.pm-dots { position: absolute; left: 0; right: 0; bottom: 14px; display: flex; justify-content: center; gap: 5px; pointer-events: none; }
+.pm-dots i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.5); box-shadow: 0 0 2px rgba(0,0,0,.4); }
+.pm-dots i.on { background: #fff; }
+.pm.single .pm-nav { display: none; }
+
+.pm-side { display: flex; flex-direction: column; min-height: 0; border-left: 1px solid #efefef; }
+.pm-body { flex: 1; overflow-y: auto; padding-top: 14px; }
+.pm-body .t { font-size: 18px; }
+.pm-ins-btn { margin-top: 16px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; font: inherit; font-size: 14px; font-weight: 600; color: var(--ink); background: #efefef; border: 0; border-radius: 8px; padding: 9px 12px; cursor: pointer; }
+.pm-ins-btn:hover { background: #e3e3e3; }
+.pm-ins-btn svg { width: 18px; height: 18px; }
+.pm-ins-btn[aria-expanded="true"] { background: var(--ink); color: #fff; }
+.pm-ins .kpis { grid-template-columns: repeat(2, 1fr); }
+.pm-ins .kpi .v { font-size: 20px; }
+.pm-ins table { font-size: 13px; }
+.pm-ins th, .pm-ins td { padding: 6px 3px; }
+
+@media (max-width: 735px) {
+  .pm { width: 100%; height: 100%; max-width: none; margin: 0; }
+  .pm::backdrop { background: #000; }
+  .pm-box { display: block; border-radius: 0; overflow-y: auto; overscroll-behavior: contain; }
+  .pm-media { height: min(125vw, 62dvh); }
+  .pm-x { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,.55); }
+  .pm-x svg { width: 20px; height: 20px; }
+  .pm-nav { display: none; }
+  .pm-side { border-left: 0; }
+  .pm-body { overflow: visible; padding-bottom: 40px; }
+  .pm-card { padding: 24px; }
+  .pm-card .h { font-size: 26px; }
+  .pm-scrollable .guide { margin: auto 16px; }
+}
