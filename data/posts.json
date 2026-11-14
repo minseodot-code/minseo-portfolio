@@ -270,15 +270,27 @@
       "id": "better-ground",
       "location": "JA Korea x KRAFTON · Seoul · Sep 2026",
       "media": {
-        "type": "guide",
-        "title": "🎮 BETTER GROUND Final",
-        "quote": "\"Welcome to all participants of BETTER GROUND Final.\"",
-        "chips": ["Emergency contacts", "Facility &amp; accommodation rules", "Daily schedule", "Venue guides", "Medical help", "About Korea"],
-        "story": "<b>A Story of Sindorim: From Factories to Pixels</b><br>\"The Sindorim and Guro areas where you are standing today are among the most dynamic, rapidly transformed spaces in South Korea. Just half a century ago, this region was a quiet, rural village.\""
+        "type": "carousel",
+        "items": [
+          { "guide": {
+            "title": "🎮 BETTER GROUND Final",
+            "quote": "\"Welcome to all participants of BETTER GROUND Final.\"",
+            "chips": [
+              "Emergency contacts",
+              "Facility &amp; accommodation rules",
+              "Daily schedule",
+              "Venue guides",
+              "Medical help",
+              "About Korea"
+            ],
+            "story": "<b>A Story of Sindorim: From Factories to Pixels</b><br>\"The Sindorim and Guro areas where you are standing today are among the most dynamic, rapidly transformed spaces in South Korea. Just half a century ago, this region was a quiet, rural village.\""
+          } },
+          { "src": "a/bg-about-korea.jpg", "alt": "About Korea section of the BETTER GROUND participant guide in Notion", "fit": true }
+        ]
       },
       "title": "An English guide for students arriving from six countries",
       "captions": [
-        "<b>minseo.chung</b> A four-day international career program for high school students from Indonesia, Malaysia, the Philippines, Thailand and more. They read the guide in their second language, on their phones, in an unfamiliar city, so it kept sections short, put the rules first, and gave each venue a bit of local history."
+        "<b>minseo.chung</b> A four-day international career program for high school students from Indonesia, Malaysia, the Philippines, Thailand and more. They read the guide in their second language, on their phones, in an unfamiliar city, so it kept sections short, put the rules first, and gave each venue a bit of local history. Participant guide pages I managed in Notion. Card design by others."
       ],
       "role": "Worked on the program from planning to on-site operations. Built the English participant guide in Notion, translated about ten showcase team and game descriptions between Korean and English, and co-planned cultural missions at Jongmyo and Ikseon-dong. I also translated the 20-page 2027 COYC guidelines from JA Asia Pacific into Korean.",
       "fine": "Excerpt from the participant-facing guide. Contact numbers and internal details left out."

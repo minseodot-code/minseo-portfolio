@@ -26,24 +26,34 @@ function renderTile(t) {
 
 /* ---------- feed ---------- */
 
+// The guide excerpt card (BETTER GROUND). Used in the feed, the popup and the story.
+const renderGuide = (g) => `<div class="guide">` +
+  `<div class="gt">${g.title}</div>` +
+  `<div class="gq">${g.quote}</div>` +
+  `<div class="chips">${g.chips.map((c) => `<span>${c}</span>`).join("")}</div>` +
+  `<div class="story">${g.story}</div></div>`;
+
+// Find the guide card in a post's media, whether it is the whole media or one carousel item.
+const findGuide = (m) => !m ? null : m.type === "guide" ? m : ((m.items || []).find((i) => i.guide) || {}).guide;
+
+// Carousel items: an image, or { guide: {...} } for the guide card.
+// "fit": true shows the whole image as a card (for wide screenshots) instead of a 440px-tall photo.
+function renderFeedItem(f) {
+  if (f.guide) return `<figure class="media-guide">${renderGuide(f.guide)}</figure>`;
+  const cls = [f.winner && "win", f.fit && "fit"].filter(Boolean).join(" ");
+  return `<figure${cls ? ` class="${cls}"` : ""}><img src="${f.src}" alt="${f.alt}">` +
+    (f.caption ? `<figcaption>${f.caption}</figcaption>` : "") + `</figure>`;
+}
+
 function renderMedia(m) {
   if (!m) return "";
   if (m.type === "single") {
     return `<div class="media light"><img src="${m.src}" alt="${m.alt}"></div>`;
   }
   if (m.type === "carousel") {
-    const figs = m.items.map((f) =>
-      `<figure${f.winner ? ' class="win"' : ""}><img src="${f.src}" alt="${f.alt}"><figcaption>${f.caption}</figcaption></figure>`
-    ).join("");
-    return `<div class="media">${figs}</div>`;
+    return `<div class="media">${m.items.map(renderFeedItem).join("")}</div>`;
   }
-  if (m.type === "guide") {
-    return `<div class="guide">` +
-      `<div class="gt">${m.title}</div>` +
-      `<div class="gq">${m.quote}</div>` +
-      `<div class="chips">${m.chips.map((c) => `<span>${c}</span>`).join("")}</div>` +
-      `<div class="story">${m.story}</div></div>`;
-  }
+  if (m.type === "guide") return renderGuide(m);
   return "";
 }
 
@@ -173,14 +183,16 @@ const modal = {
   slides(p, tile) {
     const m = p.media;
     if (m && m.type === "carousel") {
-      return m.items.map((f) =>
-        `<figure class="pm-slide${f.winner ? " win" : ""}"><img src="${f.src}" alt="${f.alt}"><figcaption>${f.caption}</figcaption></figure>`);
+      return m.items.map((f) => f.guide
+        ? `<div class="pm-slide light pm-scrollable">${renderGuide(f.guide)}</div>`
+        : `<figure class="pm-slide${f.winner ? " win" : ""}${f.fit ? " light pm-fit" : ""}"><img src="${f.src}" alt="${f.alt}">` +
+          (f.caption ? `<figcaption>${f.caption}</figcaption>` : "") + `</figure>`);
     }
     if (m && m.type === "single") {
       return [`<figure class="pm-slide light"><img src="${m.src}" alt="${m.alt}"></figure>`];
     }
     if (m && m.type === "guide") {
-      return [`<div class="pm-slide light pm-scrollable">${renderMedia(m)}</div>`];
+      return [`<div class="pm-slide light pm-scrollable">${renderGuide(m)}</div>`];
     }
     const t = tile.text || {};
     return [`<div class="pm-slide pm-card t-${t.color || "navy"}"><span class="k">${t.kicker || ""}</span>` +
@@ -310,7 +322,7 @@ const story = {
         `<span class="h">${c.headline}</span><span class="s">${c.sub}</span></div>`;
     }
     if (fr.guideFrom) {
-      return `<div class="st-frame st-guide">${renderMedia(this.posts[fr.guideFrom].media)}</div>`;
+      return `<div class="st-frame st-guide">${renderGuide(findGuide(this.posts[fr.guideFrom].media))}</div>`;
     }
     return `<figure class="st-frame"><img src="${fr.src}" alt="${fr.alt}" draggable="false">` +
       (fr.caption ? `<figcaption>${fr.caption}</figcaption>` : "") + `</figure>`;

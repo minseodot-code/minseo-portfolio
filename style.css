@@ -93,6 +93,12 @@ main { max-width: 975px; margin: 0 auto; padding: 30px 20px 60px; }
 .media figure { position: relative; flex: 0 0 auto; }
 .media figcaption { position: absolute; left: 8px; bottom: 8px; background: rgba(0,0,0,.65); color: #fff; font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 4px; }
 .media figure.win img { outline: 4px solid #ffd54a; outline-offset: -4px; }
+/* carousel slides that fill the post width: the guide card, and wide screenshots shown whole */
+.media figure.media-guide, .media figure.fit { flex: 0 0 100%; min-height: 440px; background: #f3f3f3; scroll-snap-align: start; }
+.media figure.media-guide { display: flex; flex-direction: column; padding: 18px 0; }
+.media figure.media-guide .guide { margin: auto 18px; }
+.media figure.fit { display: grid; place-items: center; padding: 18px; }
+.media figure.fit img { width: 100%; height: auto; max-height: 100%; object-fit: contain; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
 .act { display: flex; gap: 14px; padding: 10px 16px 0; font-size: 22px; }
 .act svg { width: 24px; height: 24px; }
 .body { padding: 6px 16px 18px; }
@@ -153,6 +159,7 @@ td.up { font-weight: 800; color: #1f3a68; }
   .tile .badge { font-size: 9px; padding: 2px 5px; }
   .post { border-radius: 0; border-left: 0; border-right: 0; }
   .media img { height: 360px; }
+  .media figure.media-guide, .media figure.fit { min-height: 360px; }
   .kpis { grid-template-columns: repeat(2, 1fr); }
   table { font-size: 12.5px; }
   th, td { padding: 6px 3px; }
@@ -177,6 +184,7 @@ html.pm-open { overflow: hidden; }
 .pm-slide.win img { outline: 4px solid #ffd54a; outline-offset: -4px; }
 .pm-scrollable { overflow-y: auto; display: flex; flex-direction: column; }
 .pm-scrollable .guide { margin: auto 24px; }
+.pm-fit img { inset: 24px; width: calc(100% - 48px); height: calc(100% - 48px); }
 .pm-card { color: #fff; display: flex; align-items: flex-start; flex-direction: column; justify-content: space-between; padding: 40px; }
 .pm-card .k { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; opacity: .85; }
 .pm-card .h { font-size: 34px; font-weight: 800; line-height: 1.15; max-width: 16ch; text-wrap: balance; }
