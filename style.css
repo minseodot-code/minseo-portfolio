@@ -98,7 +98,7 @@ main { max-width: 975px; margin: 0 auto; padding: 30px 20px 60px; }
 .media figure.media-guide { display: flex; flex-direction: column; padding: 18px 0; }
 .media figure.media-guide .guide { margin: auto 18px; }
 .media figure.fit { display: grid; place-items: center; padding: 18px; }
-.media figure.fit img { width: 100%; height: auto; max-height: 100%; object-fit: contain; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
+.media figure.fit img { width: auto; height: auto; max-width: 100%; max-height: 404px; object-fit: contain; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
 .act { display: flex; gap: 14px; padding: 10px 16px 0; font-size: 22px; }
 .act svg { width: 24px; height: 24px; }
 .body { padding: 6px 16px 18px; }
@@ -160,6 +160,7 @@ td.up { font-weight: 800; color: #1f3a68; }
   .post { border-radius: 0; border-left: 0; border-right: 0; }
   .media img { height: 360px; }
   .media figure.media-guide, .media figure.fit { min-height: 360px; }
+  .media figure.fit img { max-height: 324px; }
   .kpis { grid-template-columns: repeat(2, 1fr); }
   table { font-size: 12.5px; }
   th, td { padding: 6px 3px; }

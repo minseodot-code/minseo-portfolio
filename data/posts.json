@@ -60,7 +60,10 @@
     },
     {
       "href": "#better-ground",
-      "text": { "color": "navy", "kicker": "03 · JA Korea x KRAFTON", "headline": "An English guide for students from six countries", "sub": "BETTER GROUND Final · Sep 2026" }
+      "style": "background:#fff",
+      "image": { "src": "a/bg-guide-cover.jpg", "alt": "Cover of the BETTER GROUND participant guide in Notion", "style": "object-fit:contain; object-position:center" },
+      "badge": "03 BETTER GROUND",
+      "overlay": { "value": "6", "label": "countries, one English participant guide" }
     },
     {
       "href": "#france",
@@ -272,6 +275,7 @@
       "media": {
         "type": "carousel",
         "items": [
+          { "src": "a/bg-guide-cover.jpg", "alt": "Cover of the BETTER GROUND participant guide in Notion", "fit": true },
           { "guide": {
             "title": "🎮 BETTER GROUND Final",
             "quote": "\"Welcome to all participants of BETTER GROUND Final.\"",

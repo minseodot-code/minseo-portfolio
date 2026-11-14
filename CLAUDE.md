@@ -43,6 +43,7 @@ BETTER GROUND Final (JA Korea x KRAFTON, Sep 2026, Intern, Program Operations)
 - Added sheets to the master operations file (did NOT create it)
 - Translated the 20-page 2027 COYC guidelines from JA Asia Pacific into Korean
 - Minseo wrote the Tips, Etiquette and Shopping content in the About Korea section; card design was not hers.
+- Cover visual is program branding, not designed by Minseo; KRAFTON logo masked
 
 France (Aix-Marseille University, Aug 2024 – Jun 2025)
 - K-beauty presentation in French with live demos, quiz, giveaways; several classmates later bought the products; visited K-EXPO France 2024
