@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minseo Chung Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Grand+Hotel&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Layout idea: an Instagram profile. Grid of posts on top, the same posts below as a feed, each with its real Insights. */
+    --bg: #fafafa;
+    --card: #ffffff;
+    --ink: #262626;
+    --muted: #737373;
+    --line: #dbdbdb;
+    --blue: #0095f6;
+    --ring: linear-gradient(45deg, #feda75, #fa7e1e 30%, #d62976 55%, #962fbf 75%, #4f5bd5);
+    --font-body: "Figtree", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-logo: "Grand Hotel", "Brush Script MT", cursive;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3 { text-wrap: balance; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* top bar */
+  .top { position: sticky; top: 0; z-index: 20; background: var(--card); border-bottom: 1px solid var(--line); }
+  .top .in { max-width: 975px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; gap: 16px; }
+  .logo { font-family: var(--font-logo); font-size: 30px; line-height: 1; margin-right: auto; text-decoration: none; }
+  .top a.tl { font-size: 14px; font-weight: 600; text-decoration: none; color: var(--muted); }
+  .top a.tl:hover { color: var(--ink); }
+  .btn { display: inline-block; background: var(--blue); color: #fff; font-weight: 600; font-size: 14px; padding: 7px 16px; border-radius: 8px; text-decoration: none; }
+
+  main { max-width: 975px; margin: 0 auto; padding: 30px 20px 60px; }
+
+  /* profile header */
+  .profile { display: grid; grid-template-columns: 290px 1fr; gap: 28px; align-items: center; padding-bottom: 36px; }
+  .avatar { justify-self: center; width: 160px; height: 160px; border-radius: 50%; padding: 4px; background: var(--ring); }
+  .avatar span { width: 100%; height: 100%; border-radius: 50%; border: 4px solid var(--card); background: #1f3a68; color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 44px; letter-spacing: .02em; }
+  .p-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .handle { font-size: 22px; font-weight: 500; }
+  .btn.ghost { background: #efefef; color: var(--ink); }
+  .stats { display: flex; gap: 36px; margin: 18px 0; font-size: 16px; flex-wrap: wrap; }
+  .stats b { font-weight: 700; }
+  .bio b { font-weight: 700; }
+  .bio p { max-width: 560px; }
+  .bio .cat { color: var(--muted); font-size: 14px; }
+  .bio a { color: #00376b; font-weight: 600; text-decoration: none; }
+
+  /* highlights */
+  .hl { display: flex; gap: 34px; padding: 0 0 40px 30px; overflow-x: auto; }
+  .hl a { text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 0 0 auto; }
+  .hl .c { width: 78px; height: 78px; border-radius: 50%; padding: 3px; background: var(--line); }
+  .hl .c > span { display: block; width: 100%; height: 100%; border-radius: 50%; border: 3px solid var(--card); overflow: hidden; background: #f1f1f1; }
+  .hl .c img { width: 100%; height: 100%; object-fit: cover; }
+  .hl .c .txt { display: grid; place-items: center; font-weight: 800; font-size: 13px; color: #fff; background: #1f3a68; }
+  .hl small { font-size: 12px; font-weight: 600; }
+
+  /* tabs */
+  .tabs { border-top: 1px solid var(--line); display: flex; justify-content: center; gap: 56px; }
+  .tabs a { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 16px 0; text-decoration: none; border-top: 1px solid transparent; margin-top: -1px; }
+  .tabs a.on { color: var(--ink); border-top-color: var(--ink); }
+
+  /* grid */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .tile { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: #ddd; text-decoration: none; display: block; }
+  .tile img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .tile .ov { position: absolute; inset: 0; background: rgba(0,0,0,.42); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center; padding: 12px; opacity: 0; transition: opacity .15s; }
+  .tile .ov b { font-size: 26px; font-weight: 800; }
+  .tile .ov span { font-size: 13px; font-weight: 600; }
+  .tile:hover .ov, .tile:focus-visible .ov { opacity: 1; }
+  .tile .badge { position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,.55); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 7px; border-radius: 4px; }
+  .tile.text { display: flex; flex-direction: column; justify-content: space-between; padding: 18px; color: #fff; }
+  .tile.text .k { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; opacity: .85; }
+  .tile.text .h { font-size: 21px; font-weight: 800; line-height: 1.2; }
+  .tile.text .s { font-size: 13px; opacity: .9; }
+  .t-navy { background: #1f3a68; } .t-green { background: #3d6b4f; } .t-rose { background: #b0485f; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
+  .split img { height: 100%; }
+
+  /* feed */
+  .feed-head { text-align: center; margin: 64px 0 24px; }
+  .feed-head h2 { font-size: 22px; font-weight: 800; }
+  .feed-head p { color: var(--muted); font-size: 14px; }
+  .post { background: var(--card); border: 1px solid var(--line); border-radius: 10px; margin: 0 auto 36px; max-width: 760px; overflow: hidden; scroll-margin-top: 70px; }
+  .ph { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid #efefef; }
+  .mini { width: 34px; height: 34px; border-radius: 50%; padding: 2px; background: var(--ring); flex: 0 0 auto; }
+  .mini span { width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--card); background: #1f3a68; color: #fff; display: grid; place-items: center; font-size: 11px; font-weight: 800; }
+  .ph .who { font-weight: 700; font-size: 14px; line-height: 1.2; }
+  .ph .loc { font-size: 12px; color: var(--muted); }
+  .media { background: #000; display: flex; gap: 2px; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .media img { flex: 0 0 auto; height: 440px; width: auto; scroll-snap-align: start; object-fit: cover; }
+  .media.light { background: #f3f3f3; justify-content: center; }
+  .media.light img { height: auto; max-height: 440px; width: 100%; object-fit: contain; }
+  .media figure { position: relative; flex: 0 0 auto; }
+  .media figcaption { position: absolute; left: 8px; bottom: 8px; background: rgba(0,0,0,.65); color: #fff; font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 4px; }
+  .media figure.win img { outline: 4px solid #ffd54a; outline-offset: -4px; }
+  .act { display: flex; gap: 14px; padding: 10px 16px 0; font-size: 22px; }
+  .act svg { width: 24px; height: 24px; }
+  .body { padding: 6px 16px 18px; }
+  .body .t { font-size: 20px; font-weight: 800; line-height: 1.25; margin: 4px 0 8px; }
+  .cap { font-size: 15px; max-width: 65ch; }
+  .cap b { font-weight: 700; }
+  .cap + .cap { margin-top: 8px; }
+  .tags { color: #00376b; font-size: 14px; margin-top: 10px; }
+  .role { margin-top: 12px; font-size: 14px; background: #f5f7fb; border-left: 3px solid #1f3a68; padding: 9px 12px; border-radius: 4px; }
+
+  /* insights */
+  .ins { margin-top: 16px; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px 16px; }
+  .ins-h { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .ins-h b { font-size: 15px; }
+  .ins-h span { font-size: 12px; color: var(--muted); }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 12px; }
+  .kpi .v { font-size: 22px; font-weight: 800; line-height: 1.1; }
+  .kpi .l { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .bar { margin-top: 12px; }
+  .bar .lb { display: flex; justify-content: space-between; font-size: 13px; }
+  .bar .tr { height: 8px; background: #efefef; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+  .bar .fl { height: 100%; background: var(--ring); }
+  .bar .fl.b { background: #c7c7c7; }
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+  th, td { text-align: right; padding: 7px 6px; border-bottom: 1px solid #efefef; }
+  th:first-child, td:first-child { text-align: left; }
+  th { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  td.up { font-weight: 800; color: #1f3a68; }
+  .fine { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .guide { background: #fff; border: 1px solid var(--line); border-radius: 8px; margin: 18px; padding: 16px 18px; font-size: 14px; }
+  .guide .gt { font-size: 19px; font-weight: 800; }
+  .guide .gq { background: #edf3ec; padding: 7px 10px; border-radius: 5px; margin-top: 8px; }
+  .guide .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .guide .chips span { font-size: 12px; border: 1px solid var(--line); background: #f7f7f7; padding: 3px 8px; border-radius: 4px; }
+  .guide .story { margin-top: 12px; border-left: 3px solid #c8a97e; padding: 4px 0 4px 10px; color: #5a4a36; }
+  .end { text-align: center; max-width: 620px; margin: 60px auto 0; }
+  .end .q { font-size: 22px; font-weight: 700; line-height: 1.4; }
+  .end p { color: var(--muted); margin-top: 12px; }
+  .end .btn { margin-top: 18px; }
+  .foot { text-align: center; color: var(--muted); font-size: 12px; margin-top: 40px; }
+
+  @media (max-width: 735px) {
+    main { padding: 18px 16px 48px; }
+    .top a.tl { display: none; }
+    .profile { grid-template-columns: 96px 1fr; gap: 18px; align-items: start; padding-bottom: 22px; }
+    .avatar { width: 92px; height: 92px; padding: 3px; }
+    .avatar span { font-size: 26px; border-width: 3px; }
+    .handle { font-size: 19px; }
+    .stats { gap: 18px; font-size: 14px; margin: 10px 0; }
+    .bio { grid-column: 1 / -1; }
+    .hl { gap: 18px; padding: 0 0 24px; }
+    .hl .c { width: 64px; height: 64px; }
+    .tabs { gap: 30px; }
+    .grid { gap: 2px; }
+    .tile.text { padding: 10px; }
+    .tile.text .h { font-size: 14px; }
+    .tile.text .s, .tile.text .k { font-size: 10px; }
+    .tile .badge { font-size: 9px; padding: 2px 5px; }
+    .post { border-radius: 0; border-left: 0; border-right: 0; }
+    .media img { height: 360px; }
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    table { font-size: 12.5px; }
+    th, td { padding: 6px 3px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="in">
+    <a class="logo" href="#top">Portfolio</a>
+    <a class="tl" href="#midori-strategy">Midori</a>
+    <a class="tl" href="#kaffeine">K-affeine</a>
+    <a class="tl" href="#better-ground">BETTER GROUND</a>
+    <a class="btn" href="#contact">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- PROFILE -->
+  <section class="profile">
+    <div class="avatar"><span>MC</span></div>
+    <div>
+      <div class="p-row">
+        <h1 class="handle">minseo.chung</h1>
+        <a class="btn" href="#contact">Get in touch</a>
+        <a class="btn ghost" href="#midori-ab">See the A/B test</a>
+      </div>
+      <div class="stats num">
+        <span><b>12</b> posts</span>
+        <span><b>3</b> languages</span>
+        <span><b>6</b> countries at one event</span>
+      </div>
+      <div class="bio">
+        <b>Minseo Chung</b>
+        <div class="cat">Campaign &amp; Content · Seoul</div>
+        <p>I make social content people choose to join, then check the numbers to see if they did. Korean · English · French.</p>
+        <p>Applying for L'Oréal Korea [Dr.G] Campaign &amp; Content Intern</p>
+        <a href="#contact">minseodot@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <nav class="hl" aria-label="Project highlights">
+    <a href="#midori-strategy"><span class="c" style="background:var(--ring)"><span><img src="a/m29-000.jpg" alt=""></span></span><small>Midori</small></a>
+    <a href="#midori-ab"><span class="c" style="background:var(--ring)"><span><img src="a/thumb_food.jpg" alt=""></span></span><small>A/B test</small></a>
+    <a href="#kaffeine"><span class="c" style="background:var(--ring)"><span><img src="a/k6-002.jpg" alt=""></span></span><small>K-affeine</small></a>
+    <a href="#better-ground"><span class="c"><span class="txt">BG</span></span><small>BETTER GROUND</small></a>
+    <a href="#france"><span class="c"><span class="txt" style="background:#b0485f">FR</span></span><small>France</small></a>
+  </nav>
+
+  <nav class="tabs" aria-label="Views">
+    <a class="on" href="#top">Posts</a>
+    <a href="#feed">Insights</a>
+  </nav>
+
+  <!-- GRID -->
+  <section class="grid" aria-label="Posts">
+    <a class="tile" href="#midori-strategy" style="background:#f7f4ec"><img src="a/m29-000.jpg" alt="Midori character sheet" style="object-fit:contain; object-position:center"><span class="badge">01 MIDORI</span><span class="ov"><b>Strategy</b><span>A character account for a 32-store brand</span></span></a>
+    <a class="tile" href="#midori-content"><img src="a/m46-003.jpg" alt="Solo-dining level test Reel"><span class="badge">REEL</span><span class="ov"><b class="num">~90</b><span>people joined the comment event</span></span></a>
+    <a class="tile" href="#midori-content"><img src="a/m47-003.jpg" alt="Who pays tonight roulette Reel"><span class="badge">REEL</span><span class="ov"><b class="num">73</b><span>of 246 shares on the account</span></span></a>
+
+    <a class="tile" href="#midori-ab"><span class="split"><img style="object-position:center" src="a/thumb_char.jpg" alt="Thumbnail A, character scene"><img style="object-position:center" src="a/thumb_food.jpg" alt="Thumbnail B, food close-up"></span><span class="badge">A/B TEST</span><span class="ov"><b class="num">+49%</b><span>CTR for the food close-up</span></span></a>
+    <a class="tile" href="#midori-content"><img src="a/m48-002.jpg" alt="In-store Reel"><span class="badge">REEL</span><span class="ov"><b class="num">41</b><span>of 126 profile visits</span></span></a>
+    <a class="tile" href="#midori-content"><img src="a/m44-008.jpg" alt="Paid Reel creative"><span class="badge">AD</span><span class="ov"><b class="num">3.71%</b><span>link clicks relative to reach</span></span></a>
+
+    <a class="tile" href="#kaffeine"><img src="a/k6-002.jpg" alt="Who Ordered This? game art"><span class="badge">02 K-AFFEINE</span><span class="ov"><b class="num">12</b><span>countries of app users</span></span></a>
+    <a class="tile" href="#kaffeine-challenge"><img src="a/k16-001.jpg" alt="Favorite Korean drink story"><span class="badge">STORY</span><span class="ov"><b class="num">21</b><span>participant stories</span></span></a>
+    <a class="tile" href="#kaffeine"><img src="a/k16-002.jpg" alt="Favorite Korean drink story"><span class="badge">STORY</span><span class="ov"><b class="num">95.8%</b><span>of views from non-followers</span></span></a>
+
+    <a class="tile text t-navy" href="#better-ground"><span class="k">03 · JA Korea x KRAFTON</span><span class="h">An English guide for students from six countries</span><span class="s">BETTER GROUND Final · Sep 2026</span></a>
+    <a class="tile text t-rose" href="#france"><span class="k">Aix-Marseille · 2024–25</span><span class="h">K-beauty, presented in French</span><span class="s">Live demos, a quiz, giveaways</span></a>
+    <a class="tile text t-green" href="#france"><span class="k">Aix-Marseille · 2024–25</span><span class="h">International Dinner</span><span class="s">Guests proposed the next one</span></a>
+  </section>
+
+  <!-- FEED -->
+  <div class="feed-head" id="feed">
+    <h2>Posts with insights</h2>
+    <p>Every number below comes from the final project reports or Meta and Instagram Insights.</p>
+  </div>
+
+  <!-- POST 1 -->
+  <article class="post" id="midori-strategy">
+    <div class="ph"><span class="mini"><span>MC</span></span><div><div class="who">minseo.chung</div><div class="loc">Hankyung.com Marketing Job Project · Apr–Jun 2026</div></div></div>
+    <div class="media light"><img src="a/m29-000.jpg" alt="Character sheet for Midori"></div>
+    <div class="body">
+      <h3 class="t">Building a character-led Instagram account for Midoin</h3>
+      <p class="cap"><b>minseo.chung</b> Midoin runs 32+ restaurants, and its official Instagram (about 11K followers) mostly shared menus and promotions. That left room for a second account built on character and storytelling.</p>
+      <p class="cap">Our audience: women in their 20s and 30s (core 22–29) who find restaurants on Reels and Explore, skip anything that looks like an ad, and save and send what feels like their own story. So we created <b>Midori</b>, a picky eater who speaks for them: "a meal worth recording, for picky tastes."</p>
+      <p class="tags">#competitoranalysis #SWOT #personas #AISAS #ownedearnedpaid</p>
+      <div class="role"><b>My role:</b> Team leader of three. Ran the eight-week timeline and assigned roles, produced Reels and four-panel comics (ChatGPT, Kling AI, CapCut, Canva), and designed the Meta Ads A/B test.</div>
+    </div>
+  </article>
+
+  <!-- POST 2 -->
+  <article class="post" id="midori-content">
+    <div class="ph"><span class="mini"><span>MC</span></span><div><div class="who">minseo.chung</div><div class="loc">@midori__kr · swipe →</div></div></div>
+    <div class="media">
+      <figure><img src="a/m46-003.jpg" alt="Solo-dining level test"><figcaption>Join</figcaption></figure>
+      <figure><img src="a/m47-003.jpg" alt="Who pays tonight roulette"><figcaption>Send</figcaption></figure>
+      <figure><img src="a/m48-002.jpg" alt="Reel shot in store"><figcaption>Visit</figcaption></figure>
+      <figure><img src="a/m44-008.jpg" alt="Paid Reel creative"><figcaption>Paid</figcaption></figure>
+    </div>
+    <div class="body">
+      <h3 class="t">From interactive Reels to profile visits</h3>
+      <p class="cap"><b>Join:</b> a "solo-dining level test" asked people to comment their level. It led the account in views and follows, and about 90 people joined the event.</p>
+      <p class="cap"><b>Send:</b> a couple's "who pays tonight" roulette drew 73 of the account's 246 shares. <b>Visit:</b> a Reel shot in store drove 41 of 126 profile visits. <b>Paid:</b> a relatable couple scene became the ad creative.</p>
+      <div class="ins">
+        <div class="ins-h"><b>Account insights</b><span>May 18 – Jun 16, 2026</span></div>
+        <div class="kpis num">
+          <div class="kpi"><div class="v">128,976</div><div class="l">Views</div></div>
+          <div class="kpi"><div class="v">72,801</div><div class="l">Accounts reached</div></div>
+          <div class="kpi"><div class="v">1,451</div><div class="l">Interactions</div></div>
+          <div class="kpi"><div class="v">168</div><div class="l">Followers, new account</div></div>
+        </div>
+        <div class="bar"><div class="lb"><span>Views by format: Reels</span><span class="num">95.1%</span></div><div class="tr"><div class="fl" style="width:95.1%"></div></div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- POST 3 -->
+  <article class="post" id="midori-ab">
+    <div class="ph"><span class="mini"><span>MC</span></span><div><div class="who">minseo.chung</div><div class="loc">Meta Ads Manager · same Reel, two thumbnails, run at the same time</div></div></div>
+    <div class="media">
+      <figure><img src="a/thumb_char.jpg" alt="Thumbnail A, character scene"><figcaption>A · Character scene</figcaption></figure>
+      <figure class="win"><img src="a/thumb_food.jpg" alt="Thumbnail B, food close-up"><figcaption>B · Food close-up ✓</figcaption></figure>
+    </div>
+    <div class="body">
+      <h3 class="t">Testing one variable: the first frame</h3>
+      <p class="cap"><b>minseo.chung</b> Same Reel, same budget, same time. Only the thumbnail changed. The food close-up won on every metric, so we kept it.</p>
+      <div class="ins">
+        <div class="ins-h"><b>Ad insights</b><span>A · Character vs B · Food</span></div>
+        <table class="num">
+          <tr><th>Metric</th><th>A</th><th>B</th><th>Change</th></tr>
+          <tr><td>Reach</td><td>17,904</td><td>27,045</td><td class="up">+51%</td></tr>
+          <tr><td>Clicks</td><td>26</td><td>61</td><td class="up">+135%</td></tr>
+          <tr><td>CTR</td><td>0.118%</td><td>0.176%</td><td class="up">+49%</td></tr>
+          <tr><td>Cost per click</td><td>KRW 852</td><td>KRW 554</td><td class="up">−35%</td></tr>
+          <tr><td>Post engagement</td><td>1,610</td><td>2,601</td><td class="up">+62%</td></tr>
+        </table>
+        <p class="fine">I designed the test; a teammate operated the ad account.</p>
+      </div>
+      <div class="ins">
+        <div class="ins-h"><b>Campaigns against a KPI</b><span>May 26 – Jun 5, 2026</span></div>
+        <p class="cap" style="margin-top:8px">Target: 2% link clicks relative to reach. We ran two campaigns with different objectives.</p>
+        <div class="bar"><div class="lb"><span>Link-click objective · 53,575 reached</span><span class="num"><b>3.71%</b></span></div><div class="tr"><div class="fl" style="width:92.75%"></div></div></div>
+        <div class="bar"><div class="lb"><span>Impressions objective · 50,233 reached</span><span class="num">0.06%</span></div><div class="tr"><div class="fl b" style="width:1.5%"></div></div></div>
+        <div class="bar"><div class="lb"><span style="color:var(--muted)">Target</span><span class="num" style="color:var(--muted)">2.00%</span></div><div class="tr"><div class="fl b" style="width:50%"></div></div></div>
+        <p class="cap" style="margin-top:10px">What I took away: match the campaign objective to the KPI you care about.</p>
+        <p class="fine">Allocated paid budget KRW 600,000; KRW 472,907 spent across the two campaigns. Bars scaled to 4%.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- POST 4 -->
+  <article class="post" id="kaffeine">
+    <div class="ph"><span class="mini"><span>MC</span></span><div><div class="who">minseo.chung</div><div class="loc">Korea Foundation Digital Public Diplomacy Academy · Jul–Sep 2026</div></div></div>
+    <div class="media light"><img src="a/k6-002.jpg" alt="Who Ordered This? game art"></div>
+    <div class="body">
+      <h3 class="t">Making Korean café culture easier to explore</h3>
+      <p class="cap"><b>minseo.chung</b> Foreign visitors often freeze at Korean café kiosks. Our team of seven built two answers: <b>Who Ordered This?</b>, an iOS game where you make Korean drinks and help customers at a kiosk, and <b>@more_kaffeine</b>, an Instagram magazine on café culture.</p>
+      <div class="role"><b>My role:</b> Ran Meta ads for the magazine's posts, managed the team's KRW 4.5M budget, and built parts of the app backend.</div>
+      <div class="ins">
+        <div class="ins-h"><b>Magazine insights</b><span>Aug 23 – Sep 19, 2026 · 28 days</span></div>
+        <div class="kpis num">
+          <div class="kpi"><div class="v">108,425</div><div class="l">Views</div></div>
+          <div class="kpi"><div class="v">58,957</div><div class="l">Accounts reached</div></div>
+          <div class="kpi"><div class="v">+198</div><div class="l">Net followers</div></div>
+          <div class="kpi"><div class="v">1.87%</div><div class="l">Avg. engagement</div></div>
+        </div>
+        <div class="bar"><div class="lb"><span>Views from non-followers</span><span class="num">95.8%</span></div><div class="tr"><div class="fl" style="width:95.8%"></div></div></div>
+        <div class="bar"><div class="lb"><span>Interactions from non-followers</span><span class="num">78%</span></div><div class="tr"><div class="fl" style="width:78%"></div></div></div>
+      </div>
+      <div class="ins">
+        <div class="ins-h"><b>App insights</b><span>as of Sep 19, 2026</span></div>
+        <div class="kpis num">
+          <div class="kpi"><div class="v">12</div><div class="l">Countries of users</div></div>
+          <div class="kpi"><div class="v">793</div><div class="l">Play sessions</div></div>
+          <div class="kpi"><div class="v">40</div><div class="l">Sign-ups, 19 foreign</div></div>
+          <div class="kpi"><div class="v">0</div><div class="l">Download ads</div></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- POST 5 -->
+  <article class="post" id="kaffeine-challenge">
+    <div class="ph"><span class="mini"><span>MC</span></span><div><div class="who">minseo.chung</div><div class="loc">@more_kaffeine · Add Yours challenge</div></div></div>
+    <div class="media">
+      <figure><img src="a/k16-001.jpg" alt="Participant story: parfait"><figcaption>Participant story</figcaption></figure>
+      <figure><img src="a/k16-002.jpg" alt="Participant story: drink"><figcaption>Participant story</figcaption></figure>
+    </div>
+    <div class="body">
+      <h3 class="t">"My favorite Korean drink is…"</h3>
+      <p class="cap"><b>minseo.chung</b> An Add Yours sticker asked followers for their favorite Korean drink. We reshared each entry with what that drink means in Korea, in English, and kept them in an archive that grew with every entry.</p>
+      <div class="ins">
+        <div class="ins-h"><b>Challenge insights</b><span>Sep 2026</span></div>
+        <div class="kpis num" style="grid-template-columns:repeat(2,1fr)">
+          <div class="kpi"><div class="v">21</div><div class="l">Participant stories</div></div>
+          <div class="kpi"><div class="v">38K</div><div class="l">Challenge post views</div></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- POST 6 -->
+  <article class="post" id="better-ground">
+    <div class="ph"><span class="mini"><span>MC</span></span><div><div class="who">minseo.chung</div><div class="loc">JA Korea x KRAFTON · Seoul · Sep 2026</div></div></div>
+    <div class="guide">
+      <div class="gt">🎮 BETTER GROUND Final</div>
+      <div class="gq">"Welcome to all participants of BETTER GROUND Final."</div>
+      <div class="chips"><span>Emergency contacts</span><span>Facility &amp; accommodation rules</span><span>Daily schedule</span><span>Venue guides</span><span>Medical help</span><span>About Korea</span></div>
+      <div class="story"><b>A Story of Sindorim: From Factories to Pixels</b><br>"The Sindorim and Guro areas where you are standing today are among the most dynamic, rapidly transformed spaces in South Korea. Just half a century ago, this region was a quiet, rural village."</div>
+    </div>
+    <div class="body">
+      <h3 class="t">An English guide for students arriving from six countries</h3>
+      <p class="cap"><b>minseo.chung</b> A four-day international career program for high school students from Indonesia, Malaysia, the Philippines, Thailand and more. They read the guide in their second language, on their phones, in an unfamiliar city, so it kept sections short, put the rules first, and gave each venue a bit of local history.</p>
+      <div class="role"><b>My role:</b> Worked on the program from planning to on-site operations. Built the English participant guide in Notion, translated about ten showcase team and game descriptions between Korean and English, and co-planned cultural missions at Jongmyo and Ikseon-dong. I also translated the 20-page 2027 COYC guidelines from JA Asia Pacific into Korean.</div>
+      <p class="fine">Excerpt from the participant-facing guide. Contact numbers and internal details left out.</p>
+    </div>
+  </article>
+
+  <!-- POST 7 -->
+  <article class="post" id="france">
+    <div class="ph"><span class="mini"><span>MC</span></span><div><div class="who">minseo.chung</div><div class="loc">Aix-en-Provence, France · Aug 2024 – Jun 2025</div></div></div>
+    <div class="body" style="padding-top:16px">
+      <h3 class="t">Introducing Korea in French, at a dinner table</h3>
+      <p class="cap"><b>K-beauty in class.</b> I gave a K-beauty presentation in French with live product demos, a quiz and giveaways. Several classmates later bought the products. I also visited K-EXPO France 2024.</p>
+      <p class="cap"><b>International Dinner.</b> I invited friends from different countries, chose mild dishes like japchae and bulgogi for those new to spicy food, and asked everyone to bring a dish from home. Before long, friends were asking "What time tonight?" before I had even sent the invite.</p>
+      <p class="tags">#Korean #English #French #DELF_B2 #OPIc_AL</p>
+    </div>
+  </article>
+
+  <!-- END -->
+  <section class="end" id="contact">
+    <p class="q">I'm happiest when I make something people choose to join. That's what I'd like to do for Dr.G.</p>
+    <p>Minseo Chung · minseodot@gmail.com · +82 10-5718-0676 · Seoul</p>
+    <a class="btn" href="#top">Back to top</a>
+  </section>
+
+  <p class="foot">Built by Minseo Chung, 2026. Figures from the projects' final reports and Meta and Instagram Insights.</p>
+</main>
+
+</body>
+</html>
