@@ -41,7 +41,7 @@ BETTER GROUND Final (JA Korea x KRAFTON, Sep 2026, Intern, Program Operations)
 - 4-day international career program, high school students from 6 countries (Indonesia, Malaysia, the Philippines, Thailand and more)
 - Built the English participant guide in Notion; translated about 10 showcase team and game descriptions KO/EN; co-planned cultural missions at Jongmyo and Ikseon-dong
 - Added sheets to the master operations file (did NOT create it)
-- Translated the 20-page 2027 COYC guidelines from JA Asia Pacific into Korean
+- Translated the 20-page 2027 COYC guidelines from JA Asia Pacific into Korean. Do not show on the site (Minseo's request)
 - Minseo wrote the Tips, Etiquette and Shopping content in the About Korea section; card design was not hers.
 - Cover visual is program branding, not designed by Minseo; KRAFTON logo masked
 
