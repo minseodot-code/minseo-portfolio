@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="ring" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#feda75"/>
+      <stop offset=".3" stop-color="#fa7e1e"/>
+      <stop offset=".55" stop-color="#d62976"/>
+      <stop offset=".75" stop-color="#962fbf"/>
+      <stop offset="1" stop-color="#4f5bd5"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="32" fill="url(#ring)"/>
+  <circle cx="32" cy="32" r="27" fill="#1f3a68"/>
+  <text x="32" y="33" text-anchor="middle" dominant-baseline="middle" fill="#fff"
+        font-family="Figtree, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-weight="800" font-size="24">MC</text>
+</svg>
