@@ -235,6 +235,181 @@ function wireGrid(grid, data) {
   });
 }
 
+/* ---------- stories (opened from the highlight circles) ---------- */
+
+const STORY_MS = 5000;   // how long each frame stays up
+const HOLD_MS = 220;     // a press longer than this pauses instead of moving on
+
+const story = {
+  el: null, card: null, bars: null, stage: null, label: null,
+  stories: [], posts: {}, labels: [],
+  s: 0, f: 0, elapsed: 0, last: 0, raf: 0, paused: false, ready: false, opener: null,
+
+  build() {
+    document.body.insertAdjacentHTML("beforeend",
+      `<dialog class="st" id="st" aria-label="Story">` +
+        `<div class="st-card">` +
+          `<div class="st-stage"></div>` +
+          `<button class="st-tap st-tap-prev" type="button" aria-label="Previous"></button>` +
+          `<button class="st-tap st-tap-next" type="button" aria-label="Next"></button>` +
+          `<div class="st-top">` +
+            `<div class="st-bars"></div>` +
+            `<div class="st-head"><span class="mini"><span>MC</span></span>` +
+              `<b class="st-label"></b><span class="st-paused" hidden>Paused</span>` +
+              `<button class="st-x" type="button" aria-label="Close">` +
+                `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>` +
+              `</button></div>` +
+          `</div>` +
+        `</div>` +
+      `</dialog>`);
+    this.el = document.getElementById("st");
+    this.card = this.el.querySelector(".st-card");
+    this.bars = this.el.querySelector(".st-bars");
+    this.stage = this.el.querySelector(".st-stage");
+    this.label = this.el.querySelector(".st-label");
+
+    this.el.querySelector(".st-x").addEventListener("click", () => this.el.close());
+    this.el.addEventListener("click", (e) => { if (e.target === this.el) this.el.close(); });
+    this.el.addEventListener("close", () => this.stop());
+
+    // Tap left third = back, rest = forward. Press and hold = pause.
+    for (const [sel, dir] of [[".st-tap-prev", -1], [".st-tap-next", 1]]) {
+      const btn = this.el.querySelector(sel);
+      let downAt = 0, held = false, timer = 0;
+      btn.addEventListener("pointerdown", () => {
+        downAt = performance.now(); held = false;
+        timer = setTimeout(() => { held = true; this.pause(true); }, HOLD_MS);
+      });
+      const release = () => { clearTimeout(timer); if (held) this.pause(false); };
+      btn.addEventListener("pointerup", release);
+      btn.addEventListener("pointercancel", release);
+      btn.addEventListener("pointerleave", release);
+      btn.addEventListener("click", (e) => {
+        // Keyboard clicks have detail 0 and no pointerdown; treat them as taps.
+        if (held && e.detail !== 0) { held = false; return; }
+        this.step(dir);
+      });
+      btn.addEventListener("contextmenu", (e) => e.preventDefault());
+    }
+    this.el.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") { e.preventDefault(); this.step(-1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); this.step(1); }
+      if (e.key === " ") { e.preventDefault(); this.pause(!this.paused); }
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (this.el.open) this.pause(document.hidden);
+    });
+  },
+
+  frames() { return this.stories[this.s].frames; },
+
+  renderFrame(fr) {
+    if (fr.card) {
+      const c = fr.card;
+      return `<div class="st-frame st-text t-${c.color}"><span class="k">${c.kicker}</span>` +
+        `<span class="h">${c.headline}</span><span class="s">${c.sub}</span></div>`;
+    }
+    if (fr.guideFrom) {
+      return `<div class="st-frame st-guide">${renderMedia(this.posts[fr.guideFrom].media)}</div>`;
+    }
+    return `<figure class="st-frame"><img src="${fr.src}" alt="${fr.alt}" draggable="false">` +
+      (fr.caption ? `<figcaption>${fr.caption}</figcaption>` : "") + `</figure>`;
+  },
+
+  show(s, f) {
+    this.s = s; this.f = f; this.elapsed = 0; this.ready = false;
+    const frames = this.frames();
+    this.label.textContent = this.labels[s];
+    this.el.setAttribute("aria-label", `${this.labels[s]} story, ${f + 1} of ${frames.length}`);
+    this.bars.innerHTML = frames.map((_, k) =>
+      `<span><i style="transform:scaleX(${k < f ? 1 : 0})"></i></span>`).join("");
+    this.stage.innerHTML = this.renderFrame(frames[f]);
+
+    // Start the clock once the image is on screen, so slow loads don't eat the 5 seconds.
+    const img = this.stage.querySelector("img");
+    const go = () => { if (this.s === s && this.f === f) { this.ready = true; this.last = performance.now(); } };
+    if (img && !img.complete) { img.addEventListener("load", go, { once: true }); img.addEventListener("error", go, { once: true }); }
+    else go();
+
+    // Warm the cache for the next frame.
+    const next = frames[f + 1] || (this.stories[s + 1] && this.stories[s + 1].frames[0]);
+    if (next && next.src) new Image().src = next.src;
+  },
+
+  step(dir) {
+    const frames = this.frames();
+    if (dir > 0) {
+      if (this.f < frames.length - 1) this.show(this.s, this.f + 1);
+      else if (this.s < this.stories.length - 1) this.show(this.s + 1, 0);   // on to the next highlight
+      else this.el.close();
+    } else {
+      if (this.f > 0) this.show(this.s, this.f - 1);
+      else if (this.s > 0) this.show(this.s - 1, 0);
+      else this.show(0, 0);
+    }
+  },
+
+  pause(on) {
+    this.paused = on;
+    this.last = performance.now();
+    this.el.classList.toggle("paused", on);
+    this.el.querySelector(".st-paused").hidden = !on;
+  },
+
+  tick(now) {
+    if (this.ready && !this.paused) {
+      this.elapsed += now - this.last;
+      this.last = now;
+      const bar = this.bars.children[this.f].firstChild;
+      bar.style.transform = `scaleX(${Math.min(1, this.elapsed / STORY_MS)})`;
+      if (this.elapsed >= STORY_MS) this.step(1);
+    } else {
+      this.last = now;
+    }
+    if (this.el.open) this.raf = requestAnimationFrame((t) => this.tick(t));
+  },
+
+  open(s, opener) {
+    if (!this.el) this.build();
+    this.opener = opener;
+    this.pause(false);
+    this.show(s, 0);
+    document.documentElement.classList.add("pm-open");
+    this.el.showModal();
+    this.el.querySelector(".st-tap-next").focus({ preventScroll: true });
+    cancelAnimationFrame(this.raf);
+    this.raf = requestAnimationFrame((t) => { this.last = t; this.tick(t); });
+  },
+
+  stop() {
+    cancelAnimationFrame(this.raf);
+    this.stage.innerHTML = "";
+    document.documentElement.classList.remove("pm-open");
+    if (this.opener) this.opener.focus({ preventScroll: true });
+  },
+};
+
+function wireHighlights(data) {
+  const nav = document.querySelector(".hl");
+  if (!nav || !data.stories) return;
+  const links = [...nav.querySelectorAll("a")];
+  // Keep the stories in the same order as the circles, so "next" follows the row.
+  const ordered = links
+    .map((a) => ({ a, st: data.stories.find((x) => x.for === a.getAttribute("href")) }))
+    .filter((x) => x.st && x.st.frames.length);
+  story.stories = ordered.map((x) => x.st);
+  story.labels = ordered.map((x) => x.a.querySelector("small").textContent);
+  story.posts = Object.fromEntries(data.posts.map((p) => [p.id, p]));
+  nav.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    const i = ordered.findIndex((x) => x.a === a);
+    if (i < 0) return;
+    e.preventDefault();
+    story.open(i, a);
+  });
+}
+
 /* ---------- boot ---------- */
 
 fetch("data/posts.json")
@@ -247,6 +422,7 @@ fetch("data/posts.json")
     grid.innerHTML = data.grid.map(renderTile).join("");
     document.getElementById("feed").insertAdjacentHTML("afterend", data.posts.map(renderPost).join(""));
     wireGrid(grid, data);
+    wireHighlights(data);
     // Posts are added after load, so a link like /#midori-ab needs a manual jump.
     if (location.hash) {
       const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));

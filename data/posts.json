@@ -72,6 +72,48 @@
     }
   ],
 
+  "stories": [
+    {
+      "for": "#midori-strategy",
+      "frames": [
+        { "src": "a/m29-000.jpg", "alt": "Character sheet for Midori" },
+        { "src": "a/m46-003.jpg", "alt": "Solo-dining level test", "caption": "Join" },
+        { "src": "a/m47-003.jpg", "alt": "Who pays tonight roulette", "caption": "Send" },
+        { "src": "a/m48-002.jpg", "alt": "Reel shot in store", "caption": "Visit" },
+        { "src": "a/m44-008.jpg", "alt": "Paid Reel creative", "caption": "Paid" }
+      ]
+    },
+    {
+      "for": "#midori-ab",
+      "frames": [
+        { "src": "a/thumb_char.jpg", "alt": "Thumbnail A, character scene", "caption": "A · Character scene" },
+        { "src": "a/thumb_food.jpg", "alt": "Thumbnail B, food close-up", "caption": "B · Food close-up ✓" }
+      ]
+    },
+    {
+      "for": "#kaffeine",
+      "frames": [
+        { "src": "a/k6-002.jpg", "alt": "Who Ordered This? game art" },
+        { "src": "a/k16-001.jpg", "alt": "Participant story: parfait", "caption": "Participant story" },
+        { "src": "a/k16-002.jpg", "alt": "Participant story: drink", "caption": "Participant story" }
+      ]
+    },
+    {
+      "for": "#better-ground",
+      "frames": [
+        { "card": { "color": "navy", "kicker": "03 · JA Korea x KRAFTON", "headline": "An English guide for students from six countries", "sub": "BETTER GROUND Final · Sep 2026" } },
+        { "guideFrom": "better-ground" }
+      ]
+    },
+    {
+      "for": "#france",
+      "frames": [
+        { "card": { "color": "rose", "kicker": "Aix-Marseille · 2024–25", "headline": "K-beauty, presented in French", "sub": "Live demos, a quiz, giveaways" } },
+        { "card": { "color": "green", "kicker": "Aix-Marseille · 2024–25", "headline": "International Dinner", "sub": "Guests proposed the next one" } }
+      ]
+    }
+  ],
+
   "posts": [
     {
       "id": "midori-strategy",
