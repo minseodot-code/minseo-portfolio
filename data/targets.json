@@ -1,12 +1,16 @@
 {
   "default": {
-    "applying": "Looking for a Campaign & Content role",
+    "applying": "Looking for roles in global communication & content",
     "closing": "I'm happiest when I make something people choose to join. That's what I'd like to do on your team."
   },
   "targets": {
     "loreal": {
       "applying": "Applying for L'Oréal Korea [Dr.G] Campaign & Content Intern",
       "closing": "I'm happiest when I make something people choose to join. That's what I'd like to do for Dr.G."
+    },
+    "asan": {
+      "applying": "Applying for Asan Nanum Foundation · Global Team",
+      "closing": "I'm happiest when I make something people choose to join. That's what I'd like to do for Asan Nanum Foundation's global team."
     }
   }
 }
