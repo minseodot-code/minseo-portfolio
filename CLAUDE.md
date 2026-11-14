@@ -42,6 +42,7 @@ BETTER GROUND Final (JA Korea x KRAFTON, Sep 2026, Intern, Program Operations)
 - Built the English participant guide in Notion; translated about 10 showcase team and game descriptions KO/EN; co-planned cultural missions at Jongmyo and Ikseon-dong
 - Added sheets to the master operations file (did NOT create it)
 - Translated the 20-page 2027 COYC guidelines from JA Asia Pacific into Korean
+- Minseo wrote the Tips, Etiquette and Shopping content in the About Korea section; card design was not hers.
 
 France (Aix-Marseille University, Aug 2024 – Jun 2025)
 - K-beauty presentation in French with live demos, quiz, giveaways; several classmates later bought the products; visited K-EXPO France 2024
