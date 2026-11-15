@@ -109,7 +109,7 @@ function renderPost(p) {
   body += (p.insights || []).map(renderInsights).join("");
   if (p.fine) body += `<p class="fine">${p.fine}</p>`;
   body += `</div>`;
-  return `<article class="post" id="${p.id}">${postHead(p)}${renderMedia(p.media)}${body}</article>`;
+  return `<article class="post" id="${p.id}"${attr("data-bg", p.bg)}>${postHead(p)}${renderMedia(p.media)}${body}</article>`;
 }
 
 /* ---------- popup (opened from the grid) ---------- */
@@ -426,6 +426,97 @@ function wireHighlights(data) {
   });
 }
 
+/* ---------- scroll motion (feed only) ---------- */
+// 1. The page background eases to the data-bg tint of the post at the middle of the screen.
+// 2. Feed posts and their Insights panels rise 20px and fade in once, the first time they appear.
+// 3. Insights numbers count up from 0 to their exact value in under a second.
+// With prefers-reduced-motion, none of this runs and the page shows its final state.
+// Popups and stories build their own markup and are never touched here.
+
+const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// "128,976" -> {prefix:"", value:128976, decimals:0, commas:true, suffix:""}; "+198", "1.87%", "38K" likewise.
+function parseFigure(text) {
+  const m = text.match(/^(\D*?)(\d[\d,]*(?:\.\d+)?)(\D*)$/);
+  if (!m) return null;
+  const num = m[2];
+  return {
+    prefix: m[1], suffix: m[3], commas: num.includes(","),
+    decimals: num.includes(".") ? num.split(".")[1].length : 0,
+    value: parseFloat(num.replace(/,/g, "")),
+  };
+}
+
+function formatFigure(f, v) {
+  const fixed = v.toFixed(f.decimals);
+  const [int, dec] = fixed.split(".");
+  const intOut = f.commas ? int.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : int;
+  return f.prefix + intOut + (dec ? "." + dec : "") + f.suffix;
+}
+
+// The leaf element that holds a figure's text (".num" may wrap the figure in <b>).
+const figureLeaf = (el) => (el.children.length === 1 && el.firstElementChild.textContent === el.textContent ? el.firstElementChild : el);
+
+function countUp(el, ms = 900) {
+  const final = el.dataset.final;
+  const f = parseFigure(final);
+  if (!f) { el.textContent = final; return; }
+  const t0 = performance.now();
+  const tick = (now) => {
+    const k = Math.min(1, (now - t0) / ms);
+    const eased = 1 - Math.pow(1 - k, 3);
+    el.textContent = k < 1 ? formatFigure(f, f.value * eased) : final;   // always end on the original string
+    if (k < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+function initScrollMotion() {
+  if (reduceMotion() || !("IntersectionObserver" in window)) return;
+  const posts = [...document.querySelectorAll("article.post")];
+  const panels = [...document.querySelectorAll("article.post .ins")];
+
+  // 1. Background follows the post crossing the middle of the viewport.
+  const base = getComputedStyle(document.body).backgroundColor;
+  const centred = new Set();
+  const paint = () => {
+    const current = posts.find((p) => centred.has(p));   // first in page order if two overlap the line
+    document.body.style.backgroundColor = (current && current.dataset.bg) || base;
+  };
+  const bgIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => (e.isIntersecting ? centred.add(e.target) : centred.delete(e.target)));
+    paint();
+  }, { rootMargin: "-50% 0px -50% 0px" });
+  document.body.classList.add("bg-motion");
+  posts.forEach((p) => bgIO.observe(p));
+
+  // 2. Reveal once.
+  const revealIO = new IntersectionObserver((entries, io) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("in");
+      io.unobserve(e.target);
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+  [...posts, ...panels].forEach((el) => { el.classList.add("reveal"); revealIO.observe(el); });
+
+  // 3. Count up once per Insights panel.
+  const figures = (panel) => [...panel.querySelectorAll(".kpi .v, .bar .lb .num")].map(figureLeaf);
+  panels.forEach((panel) => figures(panel).forEach((el) => {
+    el.dataset.final = el.textContent;
+    const f = parseFigure(el.textContent);
+    if (f) el.textContent = formatFigure(f, 0);
+  }));
+  const countIO = new IntersectionObserver((entries, io) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      figures(e.target).forEach((el) => countUp(el));
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.35 });
+  panels.forEach((panel) => countIO.observe(panel));
+}
+
 /* ---------- per-company wording (?for=<key>) ---------- */
 
 // index.html already shows the default wording, so this only changes text when
@@ -461,6 +552,7 @@ fetch("data/posts.json")
     document.getElementById("feed").insertAdjacentHTML("afterend", data.posts.map(renderPost).join(""));
     wireGrid(grid, data);
     wireHighlights(data);
+    initScrollMotion();
     // Posts are added after load, so a link like /#midori-ab needs a manual jump.
     if (location.hash) {
       const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));

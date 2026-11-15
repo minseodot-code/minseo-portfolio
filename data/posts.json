@@ -120,6 +120,7 @@
   "posts": [
     {
       "id": "midori-strategy",
+      "bg": "#fffae4",
       "location": "Hankyung.com Marketing Job Project · Apr–Jun 2026",
       "media": { "type": "single", "src": "a/m29-000.jpg", "alt": "Character sheet for Midori" },
       "title": "Building a character-led Instagram account for Midoin",
@@ -132,6 +133,7 @@
     },
     {
       "id": "midori-content",
+      "bg": "#fffae9",
       "location": "@midori__kr · swipe →",
       "media": {
         "type": "carousel",
@@ -165,6 +167,7 @@
     },
     {
       "id": "midori-ab",
+      "bg": "#fef9f3",
       "location": "Meta Ads Manager · same Reel, two thumbnails, run at the same time",
       "media": {
         "type": "carousel",
@@ -209,6 +212,7 @@
     },
     {
       "id": "kaffeine",
+      "bg": "#f5fbf9",
       "location": "Korea Foundation Digital Public Diplomacy Academy · Jul–Sep 2026",
       "media": { "type": "single", "src": "a/k6-002.jpg", "alt": "Who Ordered This? game art" },
       "title": "Making Korean café culture easier to explore",
@@ -245,6 +249,7 @@
     },
     {
       "id": "kaffeine-challenge",
+      "bg": "#fef9f8",
       "location": "@more_kaffeine · Add Yours challenge",
       "media": {
         "type": "carousel",
@@ -271,6 +276,7 @@
     },
     {
       "id": "better-ground",
+      "bg": "#f6fcf6",
       "location": "JA Korea x KRAFTON · Seoul · Sep 2026",
       "media": {
         "type": "carousel",
@@ -300,6 +306,7 @@
     },
     {
       "id": "france",
+      "bg": "#fef8fa",
       "location": "Aix-en-Provence, France · Aug 2024 – Jun 2025",
       "title": "Introducing Korea in French, at a dinner table",
       "captions": [
