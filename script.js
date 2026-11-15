@@ -86,7 +86,11 @@ function renderInsights(ins) {
   return h + `</div>`;
 }
 
-const postHead = (p) => `<div class="ph"><span class="mini"><span>MC</span></span>` +
+// Small round profile photo used in post headers (feed, popup) and the story header.
+// Decorative: the name "minseo.chung" sits right next to it.
+const MINI_AVATAR = `<span class="mini"><span><img src="a/profile.jpg" alt="" width="480" height="480"></span></span>`;
+
+const postHead = (p) => `<div class="ph">${MINI_AVATAR}` +
   `<div><div class="who">minseo.chung</div><div class="loc">${p.location}</div></div></div>`;
 
 // Title, captions, tags and role: shared by the feed and the popup.
@@ -266,7 +270,7 @@ const story = {
           `<button class="st-tap st-tap-next" type="button" aria-label="Next"></button>` +
           `<div class="st-top">` +
             `<div class="st-bars"></div>` +
-            `<div class="st-head"><span class="mini"><span>MC</span></span>` +
+            `<div class="st-head">${MINI_AVATAR}` +
               `<b class="st-label"></b><span class="st-paused" hidden>Paused</span>` +
               `<button class="st-x" type="button" aria-label="Close">` +
                 `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>` +
