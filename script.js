@@ -31,7 +31,7 @@ const renderGuide = (g) => `<div class="guide">` +
   `<div class="gt">${g.title}</div>` +
   `<div class="gq">${g.quote}</div>` +
   `<div class="chips">${g.chips.map((c) => `<span>${c}</span>`).join("")}</div>` +
-  `<div class="story">${g.story}</div></div>`;
+  (g.story ? `<div class="story">${g.story}</div>` : "") + `</div>`;
 
 // Find the guide card in a post's media, whether it is the whole media or one carousel item.
 const findGuide = (m) => !m ? null : m.type === "guide" ? m : ((m.items || []).find((i) => i.guide) || {}).guide;
