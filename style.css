@@ -34,7 +34,7 @@ main { max-width: 975px; margin: 0 auto; padding: 30px 20px 60px; }
 /* profile header */
 .profile { display: grid; grid-template-columns: 290px 1fr; gap: 28px; align-items: center; padding-bottom: 36px; }
 .avatar { justify-self: center; width: 160px; height: 160px; border-radius: 50%; padding: 4px; background: var(--ring); }
-.avatar span { width: 100%; height: 100%; border-radius: 50%; border: 4px solid var(--card); background: #1f3a68; color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 44px; letter-spacing: .02em; }
+.avatar img { width: 100%; height: 100%; border-radius: 50%; border: 4px solid var(--card); background: var(--card); object-fit: cover; object-position: center; }
 .p-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .handle { font-size: 22px; font-weight: 500; }
 .btn.ghost { background: #efefef; color: var(--ink); }
@@ -145,7 +145,7 @@ td.up { font-weight: 800; color: #1f3a68; }
   .top a.tl { display: none; }
   .profile { grid-template-columns: 96px 1fr; gap: 18px; align-items: start; padding-bottom: 22px; }
   .avatar { width: 92px; height: 92px; padding: 3px; }
-  .avatar span { font-size: 26px; border-width: 3px; }
+  .avatar img { border-width: 3px; }
   .handle { font-size: 19px; }
   .stats { gap: 18px; font-size: 14px; margin: 10px 0; }
   .bio { grid-column: 1 / -1; }
